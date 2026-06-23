@@ -36,11 +36,9 @@ public class ServicioProveedores {
 			for( Proveedor prov : proveedores){
 				String txt1 = indice+".- ";
 				sb.append(txt1).append(prov.getNombre());
-				sb.append("  | Nombre: ").append(prov.getNombre());
 				sb.append("  | Email: ").append(prov.getEmail());
-				sb.append("  | Fono: ").append(prov.getTelefono());
 				sb.append("  | Zona: ").append(prov.getRutEmpresa().getRut());
-				sb.append("  | Giro: ").append(prov.getGiroComercial());
+				//sb.append("  | Giro: ").append(prov.getGiroComercial());
 				sb.append("  | Tipo-producto: ").append(prov.getTipoProductos()).append("\n");
 				indice++;
 			}

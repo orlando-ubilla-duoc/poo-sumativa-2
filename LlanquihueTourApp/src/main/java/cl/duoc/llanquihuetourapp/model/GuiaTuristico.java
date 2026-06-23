@@ -2,6 +2,7 @@ package cl.duoc.llanquihuetourapp.model;
 
 import cl.duoc.llanquihuetourapp.model.Persona;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -43,6 +44,8 @@ public class GuiaTuristico extends Persona {
 
 	@Override
 	public String toString() {
+		SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
+		String fechaFormateada = formateador.format(fechaCliente);
 		return "GuiaTuristico {" +
 				"nombre=" + getNombre() + '\n' +
 				", email=" + getEmail() + '\n' +
@@ -50,7 +53,7 @@ public class GuiaTuristico extends Persona {
 				", direccion=" + getDireccion() + '\n' +
 				", ciudad=" + getCiudad() + '\n' +
 				", rut=" + getRut().getRut() + '\n' +
-				", fechaCliente=" + fechaCliente + '\n' +
+				", fechaCliente=" + fechaFormateada + '\n' +
 				", NombreAgencia=" + NombreAgencia + '\n' +
 				'}';
 	}
