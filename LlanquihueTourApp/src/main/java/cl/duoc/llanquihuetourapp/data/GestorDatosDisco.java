@@ -8,13 +8,17 @@ import cl.duoc.llanquihuetourapp.model.Rut;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class GestorDatosDisco {
 
 	private ArrayList<GuiaTuristico> guias;
 	private ArrayList<Proveedor> proveedores;
 	private ArrayList<Operador> operadores;
+	private final String rutaBase = "../../../../../resources/";
 
 
 	public GestorDatosDisco() {
@@ -28,50 +32,18 @@ public class GestorDatosDisco {
 	 * @param fileName
 	 */
 	public void cargarDatosGuias(String fileName){
-
-		System.out.println("STEP-0");
-		//try( BufferedReader reader = new BufferedReader(new FileReader(fileName)) ){
-		try (InputStream is = getClass().getClassLoader().getResourceAsStream(fileName)) {
-			if (is == null) {
-				System.out.println("File not found in resources dir.: " + fileName);
-			}
-			try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))){
-				String linea;
-				System.out.println("STEP-1");
-				while( (linea = reader.readLine())!=null ){
-					try {
-						System.out.println("STEP-2");
-						String[] columnas = linea.split(";");
-						GuiaTuristico guia = new GuiaTuristico(
-								columnas[0],
-								columnas[1],
-								columnas[2],
-								columnas[3],
-								columnas[4]
-						);
-						guias.add(guia);
-					} catch (Exception e) {
-						System.out.println("El formato del archivo es inválido.");
-					}
-				}
-			}
-		} catch( IOException e ){
-			throw new RuntimeException(e);
-		}
-
-		try( BufferedReader reader = new BufferedReader( new InputStreamReader(GestorDatosDisco.class.getClassLoader().getResourceAsStream(fileName), StandardCharsets.UTF_8) ) ){
+		SimpleDateFormat formatFechas = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+		try( BufferedReader reader = new BufferedReader(new FileReader(rutaBase+fileName)) ){
 			String linea;
-			System.out.println("STEP-1");
 			while( (linea = reader.readLine())!=null ){
 				try {
-					System.out.println("STEP-2");
 					String[] columnas = linea.split(";");
 					GuiaTuristico guia = new GuiaTuristico(
-							columnas[0],
-							columnas[1],
-							columnas[2],
-							columnas[3],
-							columnas[4]
+							columnas[0].trim(),
+							columnas[1].trim(),
+							columnas[2].trim(),
+							formatFechas.parse(columnas[3].trim()),
+							columnas[4].trim()
 					);
 					guias.add(guia);
 				} catch (Exception e) {
@@ -79,6 +51,7 @@ public class GestorDatosDisco {
 				}
 			}
 		} catch ( IOException e) {
+			System.out.print(e);
 			System.out.println("Error al leer el archivo de Guias Turisticos: " + e.getMessage());
 		} catch(Exception e){
 			System.out.println("Error: " + e.getMessage());
@@ -94,22 +67,23 @@ public class GestorDatosDisco {
 	 * @param fileName
 	 */
 	public void cargarDatosProveedores(String fileName){
-		try( BufferedReader reader = new BufferedReader(new FileReader(fileName)) ){
+		try( BufferedReader reader = new BufferedReader(new FileReader(rutaBase+fileName)) ){
 			String linea;
 			while( (linea = reader.readLine())!=null ){
 				try {
 					String[] columnas = linea.split(";");
 					Proveedor proveedor = new Proveedor(
-							columnas[0],
-							columnas[1],
-							columnas[2],
-							new Rut(columnas[3]),
-							columnas[4],
-							columnas[5]
+							columnas[0].trim(),
+							columnas[1].trim(),
+							columnas[2].trim(),
+							new Rut(columnas[3].trim()),
+							columnas[4].trim(),
+							columnas[5].trim()
 					);
 					proveedores.add(proveedor);
 				} catch (Exception e) {
-					throw new FormatoArchivoInvalidoException("El formato del archivo es inválido. Asegúrese de que cada línea tenga el formato: nombreTour;ubicacion;precio");
+					System.out.print(e);
+					throw new FormatoArchivoInvalidoException("El formato del archivo Proveedores es inválido.");
 				}
 			}
 		} catch ( IOException e) {
@@ -128,22 +102,23 @@ public class GestorDatosDisco {
 	 * @param fileName
 	 */
 	public void cargarDatosOperadores(String fileName){
-		try( BufferedReader reader = new BufferedReader(new FileReader(fileName)) ){
+		try( BufferedReader reader = new BufferedReader(new FileReader(rutaBase+fileName)) ){
 			String linea;
 			while( (linea = reader.readLine())!=null ){
 				try {
 					String[] columnas = linea.split(";");
 					Operador operador = new Operador(
-							columnas[0],
-							columnas[1],
-							columnas[2],
-							columnas[3],
-							columnas[4],
-							Double.parseDouble(columnas[5])
+							columnas[0].trim(),
+							columnas[1].trim(),
+							columnas[2].trim(),
+							columnas[3].trim(),
+							columnas[4].trim(),
+							Double.parseDouble(columnas[5].trim())
 					);
 					operadores.add(operador);
 				} catch (Exception e) {
-					throw new FormatoArchivoInvalidoException("El formato del archivo es inválido. Asegúrese de que cada línea tenga el formato: nombreTour;ubicacion;precio");
+					System.out.print(e);
+					throw new FormatoArchivoInvalidoException("El formato del archivo Operadores es inválido.");
 				}
 			}
 		} catch ( IOException e) {

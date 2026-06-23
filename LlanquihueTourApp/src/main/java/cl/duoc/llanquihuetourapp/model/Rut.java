@@ -27,7 +27,7 @@ public class Rut {
 		this.dv = validateDVFormat(partes[0]);
 
 		if( !this.dv.equalsIgnoreCase(partes[1]) ){
-			throw new RutInvalidoException("RUT inválido: Dígito verificador no coincide.");
+			throw new RutInvalidoException("RUT "+partes[0]+" inválido: Dígito verificador '"+partes[1]+"' no coincide.");
 		}
 	}
 

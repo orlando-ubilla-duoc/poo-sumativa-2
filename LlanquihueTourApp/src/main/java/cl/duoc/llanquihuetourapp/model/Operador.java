@@ -47,6 +47,7 @@ public class Operador extends Persona {
 				", rut=" + getRut().getRut() + '\n' +
 				", zona=" + zona + '\n' +
 				", giroComercial=" + giroComercial + '\n' +
+				", precioServicio=" + precioServicio + '\n' +
 				'}';
 	}
 }

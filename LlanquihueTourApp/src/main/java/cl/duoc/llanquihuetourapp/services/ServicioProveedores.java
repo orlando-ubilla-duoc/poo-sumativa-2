@@ -1,5 +1,6 @@
 package cl.duoc.llanquihuetourapp.services;
 
+import cl.duoc.llanquihuetourapp.model.Operador;
 import cl.duoc.llanquihuetourapp.model.Proveedor;
 import java.util.ArrayList;
 public class ServicioProveedores {
@@ -24,14 +25,27 @@ public class ServicioProveedores {
 				System.out.println(prov.toString());
 				conta++;
 			}
-			System.out.println("Total de registros encontrados: "+conta);
 		}
+		System.out.println("Total de registros encontrados: "+conta);
 	}
 
 	public void muestraListado(){
-		for(Proveedor prov: proveedores){
-			System.out.println(prov.toString());
+		int indice = 1;
+		StringBuilder sb = new StringBuilder();
+		if( proveedores.size()>0){
+			for( Proveedor prov : proveedores){
+				String txt1 = indice+".- ";
+				sb.append(txt1).append(prov.getNombre());
+				sb.append("  | Nombre: ").append(prov.getNombre());
+				sb.append("  | Email: ").append(prov.getEmail());
+				sb.append("  | Fono: ").append(prov.getTelefono());
+				sb.append("  | Zona: ").append(prov.getRutEmpresa().getRut());
+				sb.append("  | Giro: ").append(prov.getGiroComercial());
+				sb.append("  | Tipo-producto: ").append(prov.getTipoProductos()).append("\n");
+				indice++;
+			}
 		}
+		System.out.println(sb.toString());
 	}
 
 }

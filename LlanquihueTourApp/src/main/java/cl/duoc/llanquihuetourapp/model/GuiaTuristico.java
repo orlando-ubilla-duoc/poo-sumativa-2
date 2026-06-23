@@ -9,21 +9,21 @@ import java.util.List;
 public class GuiaTuristico extends Persona {
 
 	// Fecha en que se enrola al cliente.
-	private String fechaCliente;
+	private Date fechaCliente;
 	private String NombreAgencia;
 	private List<String> NombreTours;
 
-	public GuiaTuristico(String nombre, String email, String telefono, String fecha, String agencia) {
+	public GuiaTuristico(String nombre, String email, String telefono, Date fecha, String agencia) {
 		super(nombre, email, telefono);
 		fechaCliente = fecha;
 		NombreAgencia = agencia;
 		NombreTours = new ArrayList<>();
 	}
 
-	public String getFechaCliente() {
+	public Date getFechaCliente() {
 		return fechaCliente;
 	}
-	public void setFechaCliente(String fechaCliente) {
+	public void setFechaCliente(Date fechaCliente) {
 		this.fechaCliente = fechaCliente;
 	}
 

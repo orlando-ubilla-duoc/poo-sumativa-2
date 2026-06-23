@@ -34,16 +34,18 @@ public class ServicioOperadores {
 	public void muestraListado(){
 		int indice = 1;
 		StringBuilder sb = new StringBuilder();
-		for(Operador op : operadores){
-			String txt1 = indice+".- ";
-			sb.append(txt1).append(op.getNombre());
-			sb.append("  | Nombre: ").append(op.getNombre());
-			sb.append("  | Email: ").append(op.getEmail());
-			sb.append("  | Fono: ").append(op.getTelefono());
-
-			sb.append("  | Zona: ").append(op.getZona());
-			sb.append("  | Giro: ").append(op.getGiroComercial());
-			sb.append("  | Precio: ").append(op.getPrecioServicio());
+		if( operadores.size()>0){
+			for(Operador op : operadores){
+				String txt1 = indice+".- ";
+				sb.append(txt1).append(op.getNombre());
+				sb.append("  | Nombre: ").append(op.getNombre());
+				sb.append("  | Email: ").append(op.getEmail());
+				sb.append("  | Fono: ").append(op.getTelefono());
+				sb.append("  | Zona: ").append(op.getZona());
+				sb.append("  | Giro: ").append(op.getGiroComercial());
+				sb.append("  | Precio: ").append(op.getPrecioServicio()).append("\n");
+				indice++;
+			}
 		}
 		System.out.println(sb.toString());
 	}
